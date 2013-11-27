@@ -28,12 +28,14 @@ $currentID = -1;
 
 function debug($msg = '') {
 	echo $msg." <br />\n";
-	flush();
+	ob_flush();
+        flush();
 }
 
 function error($msg) {
 	debug("ERRROR: ");
 	debug($msg);
+        ob_end_flush();
 	exit;
 }
 
@@ -94,6 +96,8 @@ function fixTable($tbname) {
 	query("ALTER TABLE `".$tbname."` IMPORT TABLESPACE");
 }
 
+ if (ob_get_level() == 0) ob_start();
+
 if (!file_exists(MYSQL_DATA_DIR)) {
 	error("The folder ".MYSQL_DATA_DIR." doesn't exists. See my.ini mysql config file, datadir value.");
 }
@@ -135,3 +139,5 @@ debug();
 debug();
 debug("DONE!");
 debug("Restart MySQL");
+
+ob_end_flush();

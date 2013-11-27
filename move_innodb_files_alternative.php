@@ -3,9 +3,9 @@
 /**
  * MOVE INNODB TABLES COPYING idb FILES FROM ONE MySQL DATA FOLDER TO ANOTHER
  *
- * · The tables must be created with innodb_file_per_table
- * · You need the structure of all tables (with auto_increment value)
- * · Works only with MySQL 5.6+
+ * Â· The tables must be created with innodb_file_per_table
+ * Â· You need the structure of all tables (with auto_increment value)
+ * Â· Works only with MySQL 5.6+
  *
  * @version		1
  * @copyright	Copyright (C) 2013 JoniJnm.es
@@ -24,12 +24,14 @@ set_time_limit(0);
 
 function debug($msg = '') {
 	echo $msg." <br />\n";
-	flush();
+	ob_flush();
+        flush();
 }
 
 function error($msg) {
 	debug("ERRROR: ");
 	debug($msg);
+        ob_end_flush();
 	exit;
 }
 
@@ -40,6 +42,7 @@ function query($query) {
 	}
 }
 
+if (ob_get_level() == 0) ob_start();
 
 if (!file_exists(MYSQL_DATA_DIR)) {
 	error("The folder ".MYSQL_DATA_DIR." doesn't exists. See my.ini mysql config file, datadir value.");
@@ -55,11 +58,11 @@ $step = isset($_GET['step']) ? $_GET['step'] : 1;
 if ($step == 1) {
 	echo "STEP 1, DO: <br />\n";
 	if (file_exists(MYSQL_DATA_DIR."/".DB_NAME)) {
-		debug("· DROP DATABASE ".DB_NAME);
+		debug("Â· DROP DATABASE ".DB_NAME);
 	}
-	debug("· CREATE DATABASE ".DB_NAME);
-	debug("· IMPORT sql STRUCTURE (with auto_increment values)");
-	debug("· STOP MYSQL");
+	debug("Â· CREATE DATABASE ".DB_NAME);
+	debug("Â· IMPORT sql STRUCTURE (with auto_increment values)");
+	debug("Â· STOP MYSQL");
 	debug();
 	debug("and click <a href='?step=2'>here</a>");
 }
@@ -92,3 +95,4 @@ elseif ($step == 3) {
 	debug("Restar MySQL");
 }
 
+ob_end_flush();
