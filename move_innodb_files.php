@@ -5,7 +5,8 @@
  *
  * · The tables must be created with innodb_file_per_table
  * · You need the structure of all tables (with auto_increment value)
- * · Works only with MySQL 5.6+
+ * · Works with MySQL 5.6+
+ * · Tested with MySQL 5.6
  *
  * @version		1
  * @copyright		Copyright (C) 2013 JoniJnm.es
