@@ -1,14 +1,14 @@
 <?php
 
 /**
- * MOVE INNODB TABLES COPYING idb FILES FROM ONE MySQL DATA FOLDER TO ANOTHER
+ * MOVES INNODB TABLES COPYING idb FILES FROM ONE MySQL DATA FOLDER TO ANOTHER
  *
  * · The tables must be created with innodb_file_per_table
  * · You need the structure of all tables (with auto_increment value)
  * · Works only with MySQL 5.6+
  *
  * @version		1
- * @copyright	Copyright (C) 2013 JoniJnm.es
+ * @copyright		Copyright (C) 2013 JoniJnm.es
  * @license		GNU/GPL
  */
 
